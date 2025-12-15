@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique()->index();
             $table->foreignId('order_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->decimal('price', 18, 8)->nullable()->default(0);
+            $table->decimal('price', 12, 2)->nullable()->default(0);
             $table->decimal('amount', 18, 8)->nullable()->default(0);
-            $table->decimal('commission', 18, 8)->nullable()->default(0);
+            $table->decimal('commission', 12, 2)->nullable()->default(0);
             $table->timestamps();
         });
     }

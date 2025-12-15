@@ -49,7 +49,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
-            'balance' => 'decimal:8',
+            'balance' => 'decimal:2',
         ];
     }
 

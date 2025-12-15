@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('symbol')->nullable()->comment('Asset symbol e.g BTC');
             $table->string('side', 25)->nullable()->comment('e.g buy/sell');
-            $table->decimal('price', 18, 8)->nullable()->default(0);
+            $table->decimal('price', 12, 2)->nullable()->default(0);
             $table->decimal('amount', 18, 8)->nullable()->default(0);
             $table->decimal('filled', 18, 8)->nullable()->default(0);
             $table->string('status')->nullable()->default(StatusOptionsEnum::OPEN->value)->comment('open=1, filled=2, canceled=3');

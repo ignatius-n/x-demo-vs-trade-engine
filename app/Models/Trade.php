@@ -15,9 +15,9 @@ class Trade extends Model
     ];
 
     protected $casts    = [
-        'price'         => 'decimal:8',
+        'price'         => 'decimal:2',
         'amount'        => 'decimal:8',
-        'commission'    => 'decimal:8',
+        'commission'    => 'decimal:2',
     ];
 
     public function order(): BelongsTo
