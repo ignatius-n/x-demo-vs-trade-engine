@@ -15,8 +15,8 @@ class Asset extends Model
     ];
 
     protected $casts    = [
-        'amount'        => 'decimal:18,8',
-        'locked_amount' => 'decimal:18,8',
+        'amount'        => 'decimal:8',
+        'locked_amount' => 'decimal:8',
     ];
 
     public function user(): BelongsTo

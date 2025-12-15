@@ -15,8 +15,8 @@ class Order extends Model
     ];
 
     protected $casts    = [
-        'price'         => 'decimal:18,8',
-        'amount'        => 'decimal:18,8',
+        'price'         => 'decimal:8',
+        'amount'        => 'decimal:8',
         'status'        => 'integer',
     ];
 
