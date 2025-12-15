@@ -12,18 +12,16 @@ class Order extends Model
     use HasUuids;
 
     protected $fillable     = [
-        'user_id', 'symbol', 'side', 'price', 'amount', 'status', 'filled',
+        'user_id', 'symbol', 'side', 'price', 'amount', 'status',
     ];
 
     protected $casts        = [
         'price'             => 'decimal:2',
         'amount'            => 'decimal:8',
-        'filled'            => 'decimal:8',
     ];
 
     protected $attributes   = [
         'status'            => StatusOptionsEnum::OPEN->value,
-        'filled'            => 0,
     ];
 
     public function user(): BelongsTo
