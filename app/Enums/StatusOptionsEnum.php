@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum StatusOptionsEnum: int
+enum StatusOptionsEnum: string
 {
-    case OPEN               = 1;
-    case FILLED             = 2;
-    case CANCELED           = 3;
+    case OPEN               = 'open';
+    case FILLED             = 'filled';
+    case CANCELED           = 'canceled';
 
     /**
      * @return string

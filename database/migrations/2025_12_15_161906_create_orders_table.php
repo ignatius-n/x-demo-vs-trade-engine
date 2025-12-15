@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusOptionsEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,8 @@ return new class extends Migration
             $table->string('side', 25)->nullable()->comment('e.g buy/sell');
             $table->decimal('price', 18, 8)->nullable()->default(0);
             $table->decimal('amount', 18, 8)->nullable()->default(0);
-            $table->tinyInteger('status')->nullable()->default(1)->comment('open=1, filled=2, canceled=3');
+            $table->decimal('filled', 18, 8)->nullable()->default(0);
+            $table->string('status')->nullable()->default(StatusOptionsEnum::OPEN->value)->comment('open=1, filled=2, canceled=3');
             $table->timestamps();
         });
     }
