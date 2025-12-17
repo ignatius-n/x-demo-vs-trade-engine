@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Jobs\InitializeOrderMatchingEngineJob;
+use App\Services\OrderPlacementService;
+use App\Services\WalletService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -24,13 +28,31 @@ class OrderController extends Controller
     /**
      * Handle order placement (BUY / SELL)
      */
-    public function store(StoreOrderRequest $request)
+    public function store(StoreOrderRequest $request): JsonResponse
     {
         try {
-            dd($request->all());
+            $orderPlacementService  = new OrderPlacementService(new WalletService());
+            $order                  = $orderPlacementService->place(
+                user: auth()->user(),
+                symbol: $request->symbol,
+                side: $request->side,
+                price: $request->price,
+                amount: $request->amount
+            );
+            /**
+             * Async matching avoids blocking HTTP request
+             * and mirrors real exchange architectures.
+             */
+            InitializeOrderMatchingEngineJob::dispatch($order->id);
+            return response()->json([
+                'message'   => 'Order placed successfully',
+                'order'     => $order->fresh(),
+            ], Response::HTTP_CREATED);
         }
-        catch (\Exception) {
-            return \response()->json([], Response::HTTP_INTERNAL_SERVER_ERROR);
+        catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error processing your request',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
