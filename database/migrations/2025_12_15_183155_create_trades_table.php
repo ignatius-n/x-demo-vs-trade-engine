@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('trades', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique()->index();
-            $table->foreignId('order_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('buy_order_id')->constrained('orders')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('sell_order_id')->constrained('orders')->cascadeOnUpdate()->cascadeOnDelete();
             $table->decimal('price', 12, 2)->nullable()->default(0);
             $table->decimal('amount', 18, 8)->nullable()->default(0);
             $table->decimal('commission', 12, 2)->nullable()->default(0);

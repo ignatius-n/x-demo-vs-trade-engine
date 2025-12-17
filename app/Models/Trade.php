@@ -11,7 +11,7 @@ class Trade extends Model
     use HasUuids;
 
     protected $fillable = [
-        'order_id', 'price', 'amount', 'commission',
+        'buy_order_id', 'sell_order_id', 'price', 'amount', 'commission',
     ];
 
     protected $casts    = [
@@ -20,8 +20,13 @@ class Trade extends Model
         'commission'    => 'decimal:2',
     ];
 
-    public function order(): BelongsTo
+    public function buyOrder(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'buy_order_id');
+    }
+
+    public function sellOrder(): BelongsTo
+    {
+        return $this->belongsTo(Order::class, 'sell_order_id');
     }
 }
