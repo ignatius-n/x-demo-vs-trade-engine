@@ -3,6 +3,7 @@
 
 ## Setup
 - PHP 8.2+
+- PHP bcmath Ext
 - Composer
 - MySQL / Postgres
 
